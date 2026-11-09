@@ -5,7 +5,7 @@ FUNGSI  : Interaksi Mini App dan pemanggilan API
 ============================================ */
 const tg=window.Telegram?.WebApp;tg?.ready();tg?.expand();
 const initData=tg?.initData||'';const user=tg?.initDataUnsafe?.user;
-document.getElementById('who').textContent=user?`${user.first_name||''} (${user.id})`:'Buka melalui Telegram';
+document.getElementById("who").textContent = `WebApp: ${tg ? "tersedia" : "tidak ada"} | initData: ${initData ? "ada" : "kosong"} | platform: ${tg?.platform || "-"}`;
 const headers={'Content-Type':'application/json','X-Telegram-Init-Data':initData};
 async function api(path,opts={}){const r=await fetch(path,{...opts,headers:{...headers,...opts.headers}});const data=await r.json();if(!r.ok)throw new Error(data.detail||'Permintaan gagal');return data}
 function notice(s){document.getElementById('notice').textContent=s}
