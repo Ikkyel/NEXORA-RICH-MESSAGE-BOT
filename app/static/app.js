@@ -16,5 +16,34 @@ document.getElementById('save').onclick=async()=>{try{const p=payload();if(p.sch
 document.getElementById('publish').onclick=async()=>{try{const p=payload();const d=await api('/api/drafts',{method:'POST',body:JSON.stringify(p)});await sendDraft(d.id)}catch(e){notice(e.message)}};
 window.sendDraft=async id=>{try{await api(`/api/drafts/${id}/publish`,{method:'POST'});notice('Posting berhasil dikirim.');await load()}catch(e){notice(e.message)}};
 document.getElementById('refresh').onclick=load;
-document.getElementById('addDest').onclick=async()=>{try{await api('/api/destinations',{method:'POST',body:JSON.stringify({title:document.getElementById('destTitle').value,chat_id:Number(document.getElementById('destChat').value),chat_type:'channel'})});notice('Tujuan berhasil ditambahkan.');await load()}catch(e){notice(e.message)}};
+document.getElementById('addDest').onclick=async()=>{
+    const title=document.getElementById('destTitle').value.trim();
+    const chatId=document.getElementById('destChat').value.trim();
+
+    if(!title || !chatId){
+        notice('Nama channel dan Chat ID wajib diisi.');
+        return;
+    }
+
+    if(!/^-?\d+$/.test(chatId)){
+        notice('Chat ID harus berupa angka.');
+        return;
+    }
+
+    try{
+        notice('Sedang menambahkan tujuan...');
+        await api('/api/destinations',{
+            method:'POST',
+            body:JSON.stringify({
+                title,
+                chat_id:Number(chatId),
+                chat_type:'channel'
+            })
+        });
+        notice('Tujuan berhasil ditambahkan.');
+        await load();
+    }catch(e){
+        notice('Gagal menambahkan tujuan: '+e.message);
+    }
+};
 if(initData)load();else notice('Mini App harus dibuka dari tombol bot Telegram.');
