@@ -1,0 +1,50 @@
+{
+  "name": "NEXORA RICH MESSAGE BOT",
+  "description": "Telegram Rich Message Bot with Mini App",
+  "repository": "https://github.com/Ikkyel/NEXORA-RICH-MESSAGE-BOT",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Token Telegram Bot dari BotFather",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "Username bot Telegram tanpa tanda @",
+      "required": false,
+      "value": ""
+    },
+    "DATABASE_URL": {
+      "description": "Supabase PostgreSQL Session Pooler connection URL",
+      "required": true
+    },
+    "WEBAPP_URL": {
+      "description": "URL HTTPS Mini App dari Heroku",
+      "required": false,
+      "value": ""
+    },
+    "APP_SECRET": {
+      "description": "Secret untuk keamanan aplikasi",
+      "generator": "secret"
+    },
+    "ADMIN_IDS": {
+      "description": "Daftar Telegram User ID admin tambahan, pisahkan dengan koma",
+      "required": false,
+      "value": ""
+    },
+    "PRIMARY_ADMIN_ID": {
+      "description": "Telegram User ID admin utama",
+      "required": true
+    },
+    "TELEGRAM_INIT_DATA_MAX_AGE": {
+      "description": "Masa berlaku autentikasi Telegram dalam detik",
+      "value": "86400"
+    },
+    "TIMEZONE": {
+      "description": "Zona waktu aplikasi",
+      "value": "Asia/Jakarta"
+    },
+    "LOG_LEVEL": {
+      "description": "Level logging aplikasi",
+      "value": "INFO"
+    }
+  }
+}
